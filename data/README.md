@@ -1,0 +1,1 @@
+Her har vi all dataen vi skal bruke til å gjøre oppgavene
