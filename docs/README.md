@@ -1,1 +1,1 @@
-Her legges eventuelle dokumenter
+Her legges eventuelle dokumenter om KI-deklarasjoner
