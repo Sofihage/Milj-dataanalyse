@@ -3,6 +3,9 @@ Oppgave 1:
 Vi har laget utviklingsmiljø i github og delt mellom oss alle. Alle har laget sin egen .venv.
 
 Oppgave 2:
+Vi hentet ut hver vår client_id ved å lage bruker her: https://frost.met.no/howto.html
+Vi har kopiert kode for å hente ut dataen: https://frost.met.no/python_example.html
+
 Vi har hentet data fra Metrologisk institutt. Andre nettsider vi var inne på var norske klimaservicesenter og openweathermap.org. Vi valgte å bruke Metrologisk institutt, fordi de hadde en API vi synes var lett å finne ut av. Vi har også valgt de, fordi de er en pålitelig kilde. Metrologisk insitutt er statlig og er derfor lett å ha tillit og tilgang til de. Vi har alle laget vår egen bruker og fått vår egen client_ID. Disse har vi lagret i hver vår lokale ENV-fil. Det at metrologisk institutt bruker client_ID ser vi på en tegn at nettsida er trygg.
 De har i tillegg mange store datasett, så det var lett å finne noe relevant. 
 
