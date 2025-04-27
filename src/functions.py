@@ -1,3 +1,9 @@
+# import av alle bibliotekene vi trenger
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+
+
 # Gjøre referansetid om til datatypen DateTime
 def make_datetime(dataset):
     dataset['referansetid'] = pd.to_datetime(dataset['referansetid'])
