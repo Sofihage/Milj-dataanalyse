@@ -38,3 +38,10 @@ def average_month(dataset):
     print('gjennomsnittlig månedlig verdi er:')
     print(monthly_average)
     return(monthly_average)
+
+
+# Finner medianen
+def median(dataset):
+    median = np.median(dataset['verdi'])
+    print("Medianen er", median)
+
