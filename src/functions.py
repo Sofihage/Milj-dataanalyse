@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import missingno as msno
 from sklearn.preprocessing import LabelEncoder
 
 
@@ -18,27 +19,6 @@ def label_tidsforskyvning(dataset):
     dataset['tidsforskyvning'] = le.fit_transform(dataset['tidsforskyvning'])
     print('tidsforskyvning har fått labels')
     print(dataset)
-
-
-# Finner det årlige gjennomsnittet for verdien til datasettet
-def average_year(dataset):
-    value = np.mean(dataset['verdi'])
-    unit = input("Hva er enheten til verdien i datasettet?")
-    print(f"Gjennomsnittlig verdi for datasettet er {value:.2f} {unit}")
-    return value
-
-
-# Regner ut gjennomsnittet for hver måned
-def average_month(dataset):
-
-    # Lager en ny kolonne i temperatur som forteller hvilken måned det er 
-    dataset['måned'] = dataset['referansetid'].dt.month
-
-    # Regner ut gjennomsnittet for hver måned
-    monthly_average = round(dataset.groupby('måned')['verdi'].mean(), 2)
-    print('gjennomsnittlig månedlig verdi er:')
-    print(monthly_average)
-    return(monthly_average)
 
 
 # Finner medianen
@@ -73,3 +53,58 @@ def average_month_bargraph(series, name, unit):
     plt.xticks(rotation=0, ticks=index, labels=index)
 
     plt.show()
+
+# Finner det årlige gjennomsnittet for verdien til datasettet
+def average_year(dataset):
+    value = np.mean(dataset['verdi'])
+    print(f"Gjennomsnittlig verdi for datasettet er {value:.2f}")
+    return value
+
+
+# Regner ut gjennomsnitt gruppert etter de ulike verdiene i valgt kolonne
+def average_other(dataset):
+    column = input('Hvilken kolonne fra datasettet vil du gruppere med? Du kan også velge måned')
+
+    # Lager en ny kolonne i temperatur som forteller hvilken måned det er 
+    if column == 'måned':
+        dataset['måned'] = dataset['referansetid'].dt.month
+
+    # Regner ut gjennomsnittet for hver kolonne
+    other_average = round(dataset.groupby(column)['verdi'].mean(), 2)
+    return(other_average)
+
+
+# Finner standardavik 
+def std(dataset):
+    std = np.std(dataset['verdi'])
+    print('Standardavviket er', round(std, 2))
+    return float(std)
+
+
+# Finner øvre og nedre grense med hjelp av standardavvik
+def lower_upper_limit(dataset):
+    mean = average_year(dataset)
+    s = std(dataset)
+    threshold = 3
+    lower_limit = mean - threshold * s
+    upper_limit = mean + threshold * s
+
+    return(lower_limit, upper_limit)
+
+    print("Nedre grense:", lower_limit)
+    print("Øvre grense:", upper_limit)
+
+
+# Viser og teller eventuelle manglende verdier
+def missing_numbers(dataset):
+
+    # Teller om noen av verdiene er None eller NaN
+    count_nan = dataset.isnull().sum()
+    print(count_nan)
+
+    # Visualiserer hvor mange verdier hver kolonne har
+    msno.bar(dataset)
+
+    
+    data_missing = dataset[dataset['verdi'].isna()]
+    print(data_missing)
