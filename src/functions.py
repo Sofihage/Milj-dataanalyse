@@ -13,11 +13,11 @@ def make_datetime(dataset):
     return (dataset['referansetid'])
 
 
-# Gir tidsforskyvning en label 
-def label_tidsforskyvning(dataset):
+# Gir valgt kolonne en label 
+def label(dataset, column="tidsforskyvning"):
     le = LabelEncoder()
-    dataset['tidsforskyvning'] = le.fit_transform(dataset['tidsforskyvning'])
-    print('tidsforskyvning har fått labels')
+    dataset[column] = le.fit_transform(dataset[column])
+    print(f'{column} har fått labels')
     print(dataset)
 
 
@@ -25,7 +25,7 @@ def label_tidsforskyvning(dataset):
 def median(dataset):
     median = np.median(dataset['verdi'])
     print("Medianen er", median)
-
+    return median
 
 # Lager et enkelt stolpediagram over en serie med data + gjennomsnitt
 def average_month_bargraph(series, name, unit):
@@ -62,8 +62,7 @@ def average_year(dataset):
 
 
 # Regner ut gjennomsnitt gruppert etter de ulike verdiene i valgt kolonne
-def average_other(dataset):
-    column = input('Hvilken kolonne fra datasettet vil du gruppere med? Du kan også velge måned')
+def average_other(dataset, column="måned"):
 
     # Lager en ny kolonne i temperatur som forteller hvilken måned det er 
     if column == 'måned':
