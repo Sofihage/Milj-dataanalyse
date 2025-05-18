@@ -107,3 +107,63 @@ def missing_numbers(dataset):
     
     data_missing = dataset[dataset['verdi'].isna()]
     print(data_missing)
+
+
+# Deler datasettet inn i train og test
+def train_test_set(dataset, size_test):    
+    # Gir labels til referansetid
+    fc.label(dataset, 'referansetid')
+
+    # Deler datasettet inn i train og test  
+    X_train, X_test, y_train, y_test = train_test_split(dataset['referansetid'], dataset['verdi'], test_size=size_test, random_state=42)
+
+    X_train, y_train = zip(*sorted(zip(X_train, y_train), key=lambda x: x[0]))
+    X_test, y_test = zip(*sorted(zip(X_test, y_test), key=lambda x: x[0]))
+
+    X_train = np.array(X_train).reshape(-1, 1)
+    X_test = np.array(X_test).reshape(-1, 1)
+    y_train = np.array(y_train)
+    y_test = np.array(y_test)
+
+    print('Datasettet er delt inn i train og test')
+    print(f'Størrelsen på test er {size_test}')
+
+    return(X_train, X_test, y_train, y_test)
+
+
+# Lager lineær regresjon og lagrer koeffisienter og konstantledd
+def linear(X, y):
+    regr = linear_model.LinearRegression()
+
+    regr.fit(X, y)
+
+    lin_y_pred = regr.predict(X)
+
+    a = regr.coef_
+    a = a[0]
+    print("koeffisienter:", a)
+
+    b = regr.intercept_
+    print("konstantledd:", b)
+    
+    return regr, lin_y_pred
+
+
+def poly(X, y):
+    poly = PolynomialFeatures(degree=2, include_bias=False)
+
+    poly_features = poly.fit_transform(X)
+
+    poly_reg = linear_model.LinearRegression()
+
+    poly_reg.fit(poly_features, y)
+
+    poly_y_pred = poly_reg.predict(poly_features)
+
+    b, a = poly_reg.coef_
+    print("koeffisienter:", b, a)
+
+    c = poly_reg.intercept_
+    print("konstantledd:", c)
+
+    return poly_reg, poly_y_pred
