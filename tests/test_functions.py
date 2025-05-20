@@ -29,6 +29,19 @@ class test_functions(unittest.TestCase):
       self.assertEqual(data['tidsforskyvning'][0], 0)
 
 
+    def test_median(self):
+      median = fc.median(data)
+      self.assertEqual(median, 6.3)
+
+    def test_average_year(self):
+        mean = fc.average_year(data)
+        self.assertEqual(mean, 2.98)
+
+
+    def test_average_other(self):
+      fc.average_other(data, tidsforskyvning)
+
+
 suite = unittest.TestSuite()
 
 suite.addTests(unittest.TestLoader().loadTestsFromTestCase(test_functions))
