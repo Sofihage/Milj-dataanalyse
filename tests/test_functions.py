@@ -44,6 +44,11 @@ class test_functions(unittest.TestCase):
       expected= pd.Series({0: 1, 1: 10.4, 2: 1.25}, name='verdi')
       expected.index.name = "tidsforskyvning"
       pd.testing.assert_series_equal(average, expected)
+
+    def test_std(self):
+      std = fc.std(data)
+      self.assertEqual(round(std, 2), 6.16)
+
        
 
 
