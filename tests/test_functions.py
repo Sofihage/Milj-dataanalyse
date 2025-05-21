@@ -15,6 +15,7 @@ data = {
   "referansetid": ['2024-01-01T00:00:00.000Z', '2024-01-01T00:00:00.000Z', '2024-01-01T00:00:00.000Z', '2024-01-01T00:00:00.000Z', '2024-01-01T00:00:00.000Z']
 }
 
+data = pd.DataFrame(data)
 
 class test_functions(unittest.TestCase):
 
@@ -39,7 +40,11 @@ class test_functions(unittest.TestCase):
 
 
     def test_average_other(self):
-      fc.average_other(data, tidsforskyvning)
+      average = fc.average_other(data, 'tidsforskyvning')
+      expected= pd.Series({0: 1, 1: 10.4, 2: 1.25}, name='verdi')
+      expected.index.name = "tidsforskyvning"
+      pd.testing.assert_series_equal(average, expected)
+       
 
 
 suite = unittest.TestSuite()
