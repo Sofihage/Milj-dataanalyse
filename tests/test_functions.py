@@ -49,6 +49,13 @@ class test_functions(unittest.TestCase):
       std = fc.std(data)
       self.assertEqual(round(std, 2), 6.16)
 
+    def test_train_test_set(self):
+      X_train, X_test, y_train, y_test = fc.train_test_set(data, 0.2)
+      self.assertEqual(len(X_train), 4)
+      self.assertEqual(len(y_train), 4)
+      self.assertEqual(len(X_test), 1)
+      self.assertEqual(len(y_test), 1)
+
        
 
 
