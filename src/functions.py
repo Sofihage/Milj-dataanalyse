@@ -115,7 +115,7 @@ def missing_numbers(dataset):
 # Deler datasettet inn i train og test
 def train_test_set(dataset, size_test):    
     # Gir labels til referansetid
-    fc.label(dataset, 'referansetid')
+    label(dataset, 'referansetid')
 
     # Deler datasettet inn i train og test  
     X_train, X_test, y_train, y_test = train_test_split(dataset['referansetid'], dataset['verdi'], test_size=size_test, random_state=42)
@@ -149,7 +149,7 @@ def linear(X, y):
     b = regr.intercept_
     print("konstantledd:", b)
     
-    return regr, lin_y_pred
+    return lin_y_pred
 
 
 def poly(X, y):
@@ -169,4 +169,4 @@ def poly(X, y):
     c = poly_reg.intercept_
     print("konstantledd:", c)
 
-    return poly_reg, poly_y_pred
+    return poly_y_pred
