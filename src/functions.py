@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import missingno as msno
+import sys
+
+sys.path.append('C:/Users/sofie/OneDrive - NTNU/4. semester/TDT4114 Anvendt programmering/Milj-dataanalyse/venv/Lib/site-packages')   
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.model_selection import train_test_split
@@ -98,7 +101,7 @@ def lower_upper_limit(dataset):
 
 
 # Viser og teller eventuelle manglende verdier
-def missing_numbers(dataset):
+def missing_numbers(dataset, column='verdi'):
 
     # Teller om noen av verdiene er None eller NaN
     count_nan = dataset.isnull().sum()
@@ -108,7 +111,7 @@ def missing_numbers(dataset):
     msno.bar(dataset)
 
     
-    data_missing = dataset[dataset['verdi'].isna()]
+    data_missing = dataset[dataset[column].isna()]
     print(data_missing)
 
 
