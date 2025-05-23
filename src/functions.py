@@ -1,11 +1,17 @@
+import sys
+src_path_2 = "..\\venv\\Lib\\site-packages"
+if src_path_2 not in sys.path:
+    sys.path.insert(0, src_path_2)
+
+
 # import av alle bibliotekene vi trenger
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import missingno as msno
-import sys
 
-sys.path.append('C:/Users/sofie/OneDrive - NTNU/4. semester/TDT4114 Anvendt programmering/Milj-dataanalyse/venv/Lib/site-packages')   
+
+ 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.model_selection import train_test_split
