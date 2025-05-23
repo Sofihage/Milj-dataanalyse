@@ -10,12 +10,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import missingno as msno
 
-
- 
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import LabelEncoder, PolynomialFeatures
 from sklearn.model_selection import train_test_split
-from sklearn import datasets, linear_model
+from sklearn import linear_model
 
 
 # Gjøre referansetid om til datatypen DateTime
@@ -38,6 +35,7 @@ def median(dataset):
     median = np.median(dataset['verdi'])
     print("Medianen er", median)
     return median
+
 
 # Lager et enkelt stolpediagram over en serie med data + gjennomsnitt
 def average_month_bargraph(series, name, unit):
@@ -65,6 +63,7 @@ def average_month_bargraph(series, name, unit):
     plt.xticks(rotation=0, ticks=index, labels=index)
 
     plt.show()
+    
 
 # Finner det årlige gjennomsnittet for verdien til datasettet
 def average_year(dataset):
