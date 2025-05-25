@@ -17,6 +17,9 @@ from sklearn import linear_model
 
 # Gjøre referansetid om til datatypen DateTime
 def make_datetime(dataset):
+    '''Tar inn et datasett
+        Returnerer "referansetid" med datatype datetime.
+    '''
     dataset['referansetid'] = pd.to_datetime(dataset['referansetid'])
     print('referansetid er gjort om til DateTime')
     return (dataset['referansetid'])
@@ -24,6 +27,9 @@ def make_datetime(dataset):
 
 # Gir valgt kolonne en label 
 def label(dataset, column="tidsforskyvning"):
+    '''Tar inn et datasett og en kolonne
+        Returnerer valgt kolonne med integer merkelapp.
+    '''
     le = LabelEncoder()
     dataset[column] = le.fit_transform(dataset[column])
     print(f'{column} har fått labels')
@@ -32,6 +38,9 @@ def label(dataset, column="tidsforskyvning"):
 
 # Finner medianen
 def median(dataset):
+    '''Tar inn et datasett
+        Returnerer medianen til kolonna "verdi".
+    '''
     median = np.median(dataset['verdi'])
     print("Medianen er", median)
     return median
@@ -67,6 +76,9 @@ def average_month_bargraph(series, name, unit):
 
 # Finner det årlige gjennomsnittet for verdien til datasettet
 def average_year(dataset):
+    '''Tar inn et datasett
+        Returnerer gjennomsnittet til kolonna "verdi".
+    '''
     value = np.mean(dataset['verdi'])
     print(f"Gjennomsnittlig verdi for datasettet er {value:.2f}")
     return value
@@ -74,6 +86,9 @@ def average_year(dataset):
 
 # Regner ut gjennomsnitt gruppert etter de ulike verdiene i valgt kolonne
 def average_other(dataset, column="måned"):
+    '''Tar inn et datasett og en kolonne
+        Returnerer gjennomsnittet per verdi i kolonna.
+    '''
 
     # Lager en ny kolonne i temperatur som forteller hvilken måned det er 
     if column == 'måned':
@@ -86,6 +101,9 @@ def average_other(dataset, column="måned"):
 
 # Finner standardavik 
 def std(dataset):
+    '''Tar inn et datasett
+        Returnerer standardavviket til kolonna "verdi".
+    '''
     std = np.std(dataset['verdi'])
     print('Standardavviket er', round(std, 2))
     return float(std)
@@ -93,6 +111,9 @@ def std(dataset):
 
 # Finner øvre og nedre grense med hjelp av standardavvik
 def lower_upper_limit(dataset):
+    '''Tar inn et datasett
+        Returnerer øvre og nedre grense 3*standardavvik ut fra gjennomsnittet.
+    '''
     mean = average_year(dataset)
     s = std(dataset)
     threshold = 3
@@ -107,6 +128,10 @@ def lower_upper_limit(dataset):
 
 # Viser og teller eventuelle manglende verdier
 def missing_numbers(dataset, column='verdi'):
+    '''Tar inn datasett og en kolonne
+        Viser hvor mange manglende verdier i hele datasettet
+        Printer de linjene med manglende verdier i valgt kolonne.
+    '''
 
     # Teller om noen av verdiene er None eller NaN
     count_nan = dataset.isnull().sum()
@@ -121,7 +146,11 @@ def missing_numbers(dataset, column='verdi'):
 
 
 # Deler datasettet inn i train og test
-def train_test_set(dataset, size_test):    
+def train_test_set(dataset, size_test): 
+    '''Tar inn datasett og størrelsen på test (i desimaltall)
+        Returnerer X (referansetid) og y (verdi) delt inn i train og test set.
+    '''   
+
     # Gir labels til referansetid
     label(dataset, 'referansetid')
 
@@ -144,6 +173,9 @@ def train_test_set(dataset, size_test):
 
 # Lager lineær regresjon og lagrer koeffisienter og konstantledd
 def linear(X, y):
+    '''Tar inn X-train og y-train datasett
+        Returnerer lineær regresjon.
+    '''
     regr = linear_model.LinearRegression()
 
     regr.fit(X, y)
@@ -161,6 +193,10 @@ def linear(X, y):
 
 
 def poly(X, y):
+    '''Tar inn X-train og y-train datasett
+        Returnerer andregrads regresjon.
+    '''
+
     poly = PolynomialFeatures(degree=2, include_bias=False)
 
     poly_features = poly.fit_transform(X)
