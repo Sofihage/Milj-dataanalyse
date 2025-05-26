@@ -65,6 +65,16 @@ class test_functions(unittest.TestCase):
       regr.fit(X_train, y_train)
       expected = regr.predict(X_train)
       np.testing.assert_array_equal(lin, expected)
+      
+    def test_poly(self):
+      X_train, X_test, y_train, y_test = fc.train_test_set(data, 0.2)
+      poly=fc.poly(X_train, y_train)
+      poly = PolynomialFeatures(degree=2, include_bias=False)
+      poly_features = poly.fit_transform(X_train)
+      poly_reg = linear_model.LinearRegression()
+      poly_reg.fit(poly_features, y_train)
+      expected = poly_reg.predict(poly_features)
+      np.testing.assert_array_equal(poly, expected)
 
 
 suite = unittest.TestSuite()
