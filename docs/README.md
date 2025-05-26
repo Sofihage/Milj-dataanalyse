@@ -1,1 +1,4 @@
-Her legges eventuelle dokumenter om KI-deklarasjoner
+Vi har skrevet under på KI-deklarasjoner.
+Vi har hovedsaklig ikke brukt KI. Vi har brukt pensum-boka vi har fått gjennom studiet, nettsider som W3Schools, stackoverflow og GeeksforGeeks. Vi har også møtt jevnlig til både lab og forelesninger. Hvis vi derimot har prøvd å søke i andre kilder og ikke funnet svar og det har vært lenge til neste forelesning eller lab, har vi brukt KI. Vi har alltid skrevet all koden selv, men om koden ikke fungerer og vi ikke finner ut noen sted hvorfor, har vi brukt microsoft copilot.
+
+Vi har skrevet refleksjonsnotatet i en egen fil og lagt det her. I notatet har vi blant annet skrevet om det vi har lært, hva vi har opplevd underveis i oppgaven og hva vi tenker vi kan ta med videre fra prosjektet.
