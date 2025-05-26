@@ -46,34 +46,6 @@ def median(dataset):
     return median
 
 
-# Lager et enkelt stolpediagram over en serie med data + gjennomsnitt
-def average_month_bargraph(series, name, unit):
-    index = series.index
-    values = series.values
-    series_mean = [np.mean(series.values)]*len(series.index)
-
-    # Initiere subplots
-    fig, ax = plt.subplots()
-    # Plotte dataserie
-    data_bars = ax.bar(index, values)
-    # Plotte gjennomsnittet
-    mean_line = ax.plot(index, series_mean,
-                        label='Gjennomsnitt',
-                        linestyle='--',
-                        color='orange'
-                        )
-    # Formatering
-    legend = ax.legend(loc='upper center')
-    plt.title(name)
-    plt.xlabel('Måned')
-    plt.ylabel(unit)
-    ax.set_axisbelow(True)
-    plt.grid(axis='y')
-    plt.xticks(rotation=0, ticks=index, labels=index)
-
-    plt.show()
-    
-
 # Finner det årlige gjennomsnittet for verdien til datasettet
 def average_year(dataset):
     '''Tar inn et datasett
