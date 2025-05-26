@@ -3,6 +3,8 @@ import sys, os
 import pandas as pd
 import numpy as np
 import datetime
+from sklearn import linear_model
+from sklearn.preprocessing import LabelEncoder, PolynomialFeatures
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), 'src')))
 
@@ -35,8 +37,8 @@ class test_functions(unittest.TestCase):
       self.assertEqual(median, 6.3)
 
     def test_average_year(self):
-        mean = fc.average_year(data)
-        self.assertEqual(mean, 2.98)
+      mean = fc.average_year(data)
+      self.assertEqual(mean, 2.98)
 
 
     def test_average_other(self):
@@ -55,8 +57,14 @@ class test_functions(unittest.TestCase):
       self.assertEqual(len(y_train), 4)
       self.assertEqual(len(X_test), 1)
       self.assertEqual(len(y_test), 1)
-
-       
+   
+    def test_linear(self):
+      X_train, X_test, y_train, y_test = fc.train_test_set(data, 0.2)
+      lin=fc.linear(X_train, y_train)
+      regr = linear_model.LinearRegression()
+      regr.fit(X_train, y_train)
+      expected = regr.predict(X_train)
+      np.testing.assert_array_equal(lin, expected)
 
 
 suite = unittest.TestSuite()
