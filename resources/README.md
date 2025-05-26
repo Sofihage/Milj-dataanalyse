@@ -1,1 +1,0 @@
-eventuelle andre resurser vi bruker
